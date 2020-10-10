@@ -15,6 +15,15 @@
         <!-- <p>{{ hobby }} sounds like a lot of fun!</p> -->
   
       </div>
+    
+    <form enctype="multipart/form-data" method="post" action="http://localhost:7777/upload/">
+        <center>
+        <h3>Select CIFAR10 image to predict its label.</h3>
+        <input type="file" name="image_file" accept="image/*"><br>
+        <input type="submit" value="Upload">
+        </center>
+    </form>
+
       
 </body>
 </html>
