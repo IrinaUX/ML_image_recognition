@@ -17,8 +17,21 @@
       <!-- Add Welcome message with name and hobby served from backend -->
       <h1>Welcome to the image recognition classification</h1>
       <p>Model CNN - {{ model }} </p>
-
     </div>
+    <form action="/action_page.php">
+      <label for="img">Select image:</label>
+      <input type="file" id="img" name="img" accept="image/*">
+      <input type="submit">
+    </form>
+
+    <label for="url">Enter an https:// URL:</label>
+
+    <input type="url" name="url" id="url"
+       placeholder="https://example.com"
+       pattern="https://.*" size="30"
+       required, type="submit">    
+    
+    
     
     
   </div>
