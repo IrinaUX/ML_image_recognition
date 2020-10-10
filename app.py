@@ -17,6 +17,10 @@ def hello_world():
     name = "project 3 - machine learning"
     return name
 
+@app.route("/upload-image", methods=["GET", "POST"])
+def upload_image():
+    return render_template("upload_image.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
