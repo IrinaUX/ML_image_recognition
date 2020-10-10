@@ -7,9 +7,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Templates 101</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- 1. Add CSS to `<head>` -->
+  <link href="https://transloadit.edgly.net/releases/uppy/v1.21.2/uppy.min.css" rel="stylesheet">
+
+  <!-- 2. Add JS before the closing `</body>` -->
+  <!-- <script src="https://transloadit.edgly.net/releases/uppy/v1.21.2/uppy.min.js"></script> -->
+
+
 </head>
 
 <body>
+  <script src="https://transloadit.edgly.net/releases/uppy/v1.21.2/uppy.min.js"></script>
+  <script>
+    var uppy = Uppy.Core()
+      .use(Uppy.Dashboard, {
+        inline: true,
+        target: '#drag-drop-area'
+      })
+      .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'})
+
+    uppy.on('complete', (result) => {
+      console.log('Upload complete! We’ve uploaded these files:', result.successful)
+    })
+  </script>
+
+
   <div class="container">
 
     <div class="jumbotron text-center">
@@ -39,7 +61,11 @@
       <p><input type="file" name="uploadFile" accept="image/*" required></p>
       <p><input type="submit" value="Submit"></p>
     </form>
-    
+
+   <!-- <input type="text" id="finput">
+   <input type="button" value="Upload" onclick="upload()">
+
+     -->
 
     
     <script src="app.js"></script>

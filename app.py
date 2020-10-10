@@ -15,8 +15,8 @@ def upload_file():
         uploaded_file = request.files['uploadFile']
         if uploaded_file.filename != '':
             uploaded_file.save(uploaded_file.filename)
-        return redirect(url_for('index'))
-    return render_template('index.html')
+        return redirect(url_for('file_upload_form.html'))
+    return render_template('file_upload_form.html')
 
 
 if __name__ == "__main__":
