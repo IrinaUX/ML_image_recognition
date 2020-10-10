@@ -12,30 +12,16 @@
 
   <!-- 2. Add JS before the closing `</body>` -->
   <!-- <script src="https://transloadit.edgly.net/releases/uppy/v1.21.2/uppy.min.js"></script> -->
-
-
+  
 </head>
 
 <body>
-  <script src="https://transloadit.edgly.net/releases/uppy/v1.21.2/uppy.min.js"></script>
-  <script>
-    var uppy = Uppy.Core()
-      .use(Uppy.Dashboard, {
-        inline: true,
-        target: '#drag-drop-area'
-      })
-      .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'})
 
-    uppy.on('complete', (result) => {
-      console.log('Upload complete! We’ve uploaded these files:', result.successful)
-    })
-  </script>
 
 
   <div class="container">
 
     <div class="jumbotron text-center">
-      
       <!-- Add Welcome message with name and hobby served from backend -->
       <h1>Welcome to the image recognition classification</h1>
       <p>- Model CNN - {{ model }} </p>
@@ -56,20 +42,18 @@
 
     <label for="url">Enter an https:// URL:</label> -->
 
-    <h1>File Upload</h1>
+    <!-- <h1>File Upload</h1>
     <form class="upload" method="POST" action="" enctype="multipart/form-data">
       <p><input type="file" name="uploadFile" accept="image/*" required></p>
       <p><input type="submit" value="Submit"></p>
-    </form>
+    </form> -->
 
-   <!-- <input type="text" id="finput">
-   <input type="button" value="Upload" onclick="upload()">
-
-     -->
-
+    <input id="inp" type='file' multiple>
+    <p id="b64"></p>
+    <img id="img" height="150">
     
-    <script src="app.js"></script>
-    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
   </div>
 </body>
 

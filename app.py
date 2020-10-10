@@ -10,13 +10,12 @@ model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 # create route that renders index.html template
 @app.route('/', methods=['GET', 'POST'])
-def upload_file():
+def index():
     if request.method == 'POST':
-        uploaded_file = request.files['uploadFile']
+        uploaded_file = request.files['upload']
         if uploaded_file.filename != '':
             uploaded_file.save(uploaded_file.filename)
-        return redirect(url_for('file_upload_form.html'))
-    return render_template('file_upload_form.html')
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
