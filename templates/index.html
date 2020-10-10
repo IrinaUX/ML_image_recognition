@@ -16,23 +16,33 @@
       
       <!-- Add Welcome message with name and hobby served from backend -->
       <h1>Welcome to the image recognition classification</h1>
-      <p>Model CNN - {{ model }} </p>
+      <p>- Model CNN - {{ model }} </p>
     </div>
-    <form action="/action_page.php">
+
+
+
+    <!-- <form action="/action_page.php">
       <label for="img">Select image:</label>
       <input type="file" id="img" name="img" accept="image/*">
-      <input type="submit">
+      <input type="submit" value ="Provide image link">
+      
+      <input type="url" name="url" id="url"
+      placeholder="https://example.com"
+      pattern="https://.*" size="30"
+      required, type="submit"> 
     </form>
 
-    <label for="url">Enter an https:// URL:</label>
+    <label for="url">Enter an https:// URL:</label> -->
 
-    <input type="url" name="url" id="url"
-       placeholder="https://example.com"
-       pattern="https://.*" size="30"
-       required, type="submit">    
+    <h1>File Upload</h1>
+    <form class="upload" method="POST" action="" enctype="multipart/form-data">
+      <p><input type="file" name="uploadFile" accept="image/*" required></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
     
+
     
-    
+    <script src="app.js"></script>
     
   </div>
 </body>
