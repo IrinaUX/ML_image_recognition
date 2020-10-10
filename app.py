@@ -1,27 +1,18 @@
-from flask import Flask, render_template, redirect
-from flask_pymongo import PyMongo
+# import necessary libraries
+from flask import Flask, render_template
 from keras.models import load_model
-import pymongo
 
-# from secret import username, password
-
+# create instance of Flask app
 app = Flask(__name__)
 
-# Load the model
-from keras.models import load_model
-
+# Set variables
 model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
-@app.route('/')
-def hello_world():
-    name = "project 3, group 6 - machine learning"
+# create route that renders index.html template
+@app.route("/")
+def echo():
 
-    
-    return name
-
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
-    return render_template("upload_image.html")
+    return render_template("index.html", model=model)
 
 
 if __name__ == "__main__":
