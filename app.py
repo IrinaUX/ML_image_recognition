@@ -14,7 +14,7 @@ model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 @app.route('/')
 def hello_world():
-    name = "project 3 - machine learning"
+    name = "project 3, group 6 - machine learning"
     return name
 
 @app.route("/upload-image", methods=["GET", "POST"])

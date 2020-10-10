@@ -11,19 +11,11 @@
     <div class="jumbotron text-center">
       
         <!-- Add Welcome message with name and hobby served from backend -->
-        <h1>Welcome {{ name }}</h1>
+        <h1>{{ name }}</h1>
         <!-- <p>{{ hobby }} sounds like a lot of fun!</p> -->
   
-      </div>
+    </div>
     
-    <form enctype="multipart/form-data" method="post" action="http://localhost:7777/upload/">
-        <center>
-        <h3>Select CIFAR10 image to predict its label.</h3>
-        <input type="file" name="image_file" accept="image/*"><br>
-        <input type="submit" value="Upload">
-        </center>
-    </form>
-
       
 </body>
 </html>
