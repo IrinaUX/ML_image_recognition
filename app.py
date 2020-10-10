@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 # Load the model
 from keras.models import load_model
-model = load_model('mnist.h5')
-model = 
+
+model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 @app.route('/')
 def hello_world():
