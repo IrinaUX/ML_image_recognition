@@ -52,8 +52,11 @@
     <p id="output_field"></p>
     <img id="img" height="150">
     
-    <input id="inp" type='url'>
-    
+    <input type="url" name="url" id="url"
+       placeholder="https://example.com"
+       pattern="https://.*" size="30"
+       required>
+
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
