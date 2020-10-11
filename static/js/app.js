@@ -31,17 +31,15 @@ function readFile() {
     FR.addEventListener("load", function(e) {
       document.getElementById("img").src       = e.target.result;
       document.getElementById("b64").innerHTML = e.target.result;
-      img64string = FR.result;
+      var img64string = FR.result;
       img64 = img64string.split(",")[1];
     }); 
     FR.onload = function() {
       console.log(img64);
-
     }
-    FR.readAsDataURL( this.files[0] );
+    FR.readAsDataURL( this.files[0]);
     }
   }
-  
 
   document.getElementById("inp").addEventListener("change", readFile);
 
