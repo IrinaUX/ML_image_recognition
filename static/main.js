@@ -25,10 +25,23 @@ function getDataUrl(img) {
 var selectedFile = document.getElementById("file-upload");
 selectedFile.addEventListener("change", selectedFileHandler, false);
 
+var imagePreview = document.getElementById("image-preview");
+
+
 function selectedFileHandler(e) {
   var files = e.target.files;
   console.log(files);
-  
+  e.preventDefault();
+  file = files[0];
+  console.log(file.name);
+  var fileName = encodeURI(file.name);
+  console.log(fileName);
+  var FR = new FileReader();
+  FR.readAsDataURL(file);
+  console.log(FR);
+
+  imagePreview.src = URL.createObjectURL(file);
+  imagePreview.classList.remove("hidden");
 }
 
 function readFile() {
