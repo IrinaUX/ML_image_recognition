@@ -22,6 +22,15 @@ function getDataUrl(img) {
 //      alert("Chose " + filename)
 //  }
 
+var selectedFile = document.getElementById("file-upload");
+selectedFile.addEventListener("change", selectedFileHandler, false);
+
+function selectedFileHandler(e) {
+  var files = e.target.files;
+  console.log(e.name);
+  
+}
+
 function readFile() {
   
   if (this.files) {
@@ -41,6 +50,6 @@ function readFile() {
     }
   }
 
-  document.getElementById("inp").addEventListener("change", readFile);
+  // document.getElementById("inp").addEventListener("change", readFile);
 
 
