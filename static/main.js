@@ -27,7 +27,7 @@ selectedFile.addEventListener("change", selectedFileHandler, false);
 
 function selectedFileHandler(e) {
   var files = e.target.files;
-  console.log(e.name);
+  console.log(files);
   
 }
 
