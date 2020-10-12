@@ -6,7 +6,7 @@ from tensorflow.keras.applications.vgg19 import preprocess_input
 
 
 #load model
-model = load_model('')
+model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 #define global variables
 class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
