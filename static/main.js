@@ -9,23 +9,14 @@ function getDataUrl(img) {
     ctx.drawImage(img, 0, 0);
     return canvas.toDataURL('https://testbucketirina.s3.eu-west-2.amazonaws.com/ml-image/img_cat_real.jpeg');
  }
-//  // Select the image
-//  const img = document.querySelector('#my-image');
-//  img.addEventListener('load', function (event) {
-//     const dataUrl = getDataUrl(event.currentTarget);
-//     console.log(dataUrl);
-//  });
-
-//  function upload() {
-//      var fileinput = document.getElementById("finput");
-//      var filename = fileinput.nodeValue;
-//      alert("Chose " + filename)
-//  }
 
 var selectedFile = document.getElementById("file-upload");
 selectedFile.addEventListener("change", selectedFileHandler, false);
-
 var imagePreview = document.getElementById("image-preview");
+var imageDisplay = document.getElementById("image-display");
+var uploadCaption = document.getElementById("upload-caption");
+var predResult = document.getElementById("pred-result");
+var loader = document.getElementById("loader");
 
 
 function selectedFileHandler(e) {
@@ -38,31 +29,33 @@ function selectedFileHandler(e) {
   console.log(fileName);
   var FR = new FileReader();
   FR.readAsDataURL(file);
-  console.log(FR);
 
+  FR.onloadend = () => {
+    imagePreview.src = URL.createObjectURL(file);
+
+    show(imagePreview);
+    hide(uploadCaption);
+
+    // reset
+    predResult.innerHTML = "";
+    imageDisplay.classList.remove("loading");
+
+    let display = document.getElementById("image-display");
+    display.src = FR.result;
+    show(display);
+  };
+
+  console.log(FR);
   imagePreview.src = URL.createObjectURL(file);
   imagePreview.classList.remove("hidden");
+  console.log(imagePreview.src);
 }
 
-function readFile() {
-  
-  if (this.files) {
-    
-    var FR = new FileReader();
-    let img64 = "";
-    FR.addEventListener("load", function(e) {
-      document.getElementById("img").src       = e.target.result;
-      document.getElementById("b64").innerHTML = e.target.result;
-      var img64string = FR.result;
-      img64 = img64string.split(",")[1];
-    }); 
-    FR.onload = function() {
-      console.log(img64);
-    }
-    FR.readAsDataURL( this.files[0]);
-    }
-  }
 
-  // document.getElementById("inp").addEventListener("change", readFile);
+function hide(el) {
+  el.classList.add("hidden");
+}
 
-
+function show(el) {
+  el.classList.remove("hidden");
+}

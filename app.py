@@ -12,6 +12,8 @@ from tensorflow.keras.applications.imagenet_utils import preprocess_input, decod
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
+from helperfunctions import b64_PIL, num_b64
+
 # Create an instance of Flask
 app = Flask(__name__)
 
@@ -33,6 +35,11 @@ image_size = (32, 32)
 # Select the image file
 filepath = "images/deer2.jpeg"    
 
+# @app.route('/', methods=['GET'])
+# def index():
+#     return render_template('index.html', message="new FROG")
+
+
 print("---------------> FLASK < --------------")
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -43,6 +50,7 @@ def home():
     x = preprocess_input(x)
     print("IMAGE PREPROCESSED")
     if request.method == "POST":
+        # print(request.files("file"))
         predictions = model.predict(x)  
         print(f'PREDICTED:, {predictions}')
         img = np.reshape(img,[1,32,32,3])
