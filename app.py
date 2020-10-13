@@ -1,10 +1,11 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify
 from predict import predict_new 
 import cv2
 import pandas as pd
 import numpy as np
 import os
 import sys
+import gevent 
 
 import tensorflow as tf
 from tensorflow import keras
@@ -13,9 +14,20 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 from helperfunctions import b64_PIL, num_b64
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 # Create an instance of Flask
 app = Flask(__name__)
+sio = SocketIO(app, always_connect=True, engineio_logger=True)
+
+@sio.on('connect')
+def connected():
+    print('connect')
+    
+@sio.on('disconnect')
+def disconnect():
+    print('disconnect')
+
 
 # Load the model
 model = load_model('saved_models/keras_cifar10_trained_model.h5')
@@ -58,7 +70,18 @@ def home():
         classes = np.argmax(model.predict(img), axis = 1)
         names = [class_names[i] for i in classes]
         name = names[0]
-    return render_template('index.html', message = name)
+        # json_name = jsonify(name)
+        print(f"-------------> NAME {name}")
+    return render_template('index.html', message = jsonify(name))
+
+# Test Socket IO
+
+@sio.on('image-upload')
+def imageUpload(image):
+    print("---------> SOCKET IO")
+    emit('send-image', image, broadcast = True)
+
+### End test ###
 
 if __name__ == "__main__":
-    app.run()
+    sio.run(app, debug=True)

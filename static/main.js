@@ -32,6 +32,7 @@ function selectedFileHandler(e) {
 
   FR.onloadend = () => {
     imagePreview.src = URL.createObjectURL(file);
+    console.log(imagePreview.src);
 
     show(imagePreview);
     hide(uploadCaption);
@@ -43,12 +44,15 @@ function selectedFileHandler(e) {
     let display = document.getElementById("image-display");
     display.src = FR.result;
     show(display);
+    console.log(display.src);
   };
 
   console.log(FR);
   imagePreview.src = URL.createObjectURL(file);
   imagePreview.classList.remove("hidden");
   console.log(imagePreview.src);
+  console.log(typeof(imagePreview.src));
+  console.log((imagePreview.src).length);
 }
 
 
@@ -59,3 +63,17 @@ function hide(el) {
 function show(el) {
   el.classList.remove("hidden");
 }
+
+// SOCKET IO TEST
+function appendImageMessage(data) {
+  var messageContainer = document.getElementById('message-container');
+  messageContainer.appendChild(createImageMessageDOM(data))
+}
+
+function createImageMessageDOM(data) {
+  var img = document.createElement("img");
+  img.src = data.binary;
+  img.style.width = '100%';
+}
+
+// end test
