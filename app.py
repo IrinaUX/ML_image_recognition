@@ -1,6 +1,5 @@
 from flask import Flask, render_template, redirect, request, jsonify
 from predict import predict_new 
-import cv2
 import pandas as pd
 import numpy as np
 import os
