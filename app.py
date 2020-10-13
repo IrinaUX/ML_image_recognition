@@ -65,4 +65,4 @@ def home():
     return render_template('index.html', message = jsonify(name))
 
 if __name__ == "__main__":
-    sio.run(app, debug=True)
+    app.run(debug=True)
