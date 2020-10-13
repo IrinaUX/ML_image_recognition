@@ -18,16 +18,6 @@ from flask_socketio import SocketIO, emit, join_room, leave_room
 
 # Create an instance of Flask
 app = Flask(__name__)
-sio = SocketIO(app, always_connect=True, engineio_logger=True)
-
-@sio.on('connect')
-def connected():
-    print('connect')
-    
-@sio.on('disconnect')
-def disconnect():
-    print('disconnect')
-
 
 # Load the model
 model = load_model('saved_models/keras_cifar10_trained_model.h5')
@@ -73,15 +63,6 @@ def home():
         # json_name = jsonify(name)
         print(f"-------------> NAME {name}")
     return render_template('index.html', message = jsonify(name))
-
-# Test Socket IO
-
-@sio.on('image-upload')
-def imageUpload(image):
-    print("---------> SOCKET IO")
-    emit('send-image', image, broadcast = True)
-
-### End test ###
 
 if __name__ == "__main__":
     sio.run(app, debug=True)

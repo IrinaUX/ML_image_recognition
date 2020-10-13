@@ -18,8 +18,7 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-
+    
 </head>
     <style>
         .bd-placeholder-img {
@@ -41,16 +40,6 @@
 
 
 <body class="text-center">
-    <!-- Socket IO test -->
-    <script>
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        socket.on('connect',
-          function() {  
-             console.log('initSocketIO')
-          });
-      </script>
-    
-    <!-- end test -->
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
         <div class="inner">
@@ -86,16 +75,6 @@
                 </svg>
             </div>
             <h3>{{ message }}</h3>
-            <!-- SOCKET IO TEST -->
-            <div id="message-container"></div>
-            <script>
-                socket.on("send-image", function(data){
-                    appendImageMessage(data)
-                })
-            </script>
-            <!-- END TEST -->
-
-            
         </main>
     </div>
 

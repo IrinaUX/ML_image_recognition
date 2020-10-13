@@ -63,17 +63,3 @@ function hide(el) {
 function show(el) {
   el.classList.remove("hidden");
 }
-
-// SOCKET IO TEST
-function appendImageMessage(data) {
-  var messageContainer = document.getElementById('message-container');
-  messageContainer.appendChild(createImageMessageDOM(data))
-}
-
-function createImageMessageDOM(data) {
-  var img = document.createElement("img");
-  img.src = data.binary;
-  img.style.width = '100%';
-}
-
-// end test
