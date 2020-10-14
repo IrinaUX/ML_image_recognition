@@ -59,6 +59,9 @@
             <p class="lead">
             </p>
             <p class="lead">Select an Image and Click on Submit</p>
+            
+            <!-- FORM -->
+            
             <input id="file-upload" class="btn btn-lg btn-secondary" type="file" accept="image/x-png,image/gif,image/jpeg" />
             <div id="upload-caption"></div>
             <p class="lead"></p>
@@ -66,6 +69,8 @@
                 <!-- <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submitImage();" /> -->
                 <!-- <input type="button" value="Clear" class="btn btn-lg btn-secondary" onclick="clearImage();" /> -->
             </div>
+            
+            
             <p class="lead"></p>
             <div id="image-box">
                 <img id="image-display" />
@@ -83,7 +88,6 @@
             <script src="{{ url_for('static',filename='main.js') }}"></script>
         </div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

@@ -34,12 +34,7 @@ class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', '
 image_size = (32, 32)
 
 # Select the image file
-filepath = "images/deer2.jpeg"    
-
-# @app.route('/', methods=['GET'])
-# def index():
-#     return render_template('index.html', message="new FROG")
-
+filepath = "images/horse.jpeg"
 
 print("---------------> FLASK < --------------")
 @app.route("/", methods=["GET", "POST"])
@@ -50,18 +45,27 @@ def home():
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
     print("IMAGE PREPROCESSED")
-    if request.method == "POST":
-        # print(request.files("file"))
-        predictions = model.predict(x)  
-        print(f'PREDICTED:, {predictions}')
-        img = np.reshape(img,[1,32,32,3])
-        print(f'RESHAPED PREDICTED IMAGE: {img}')
-        classes = np.argmax(model.predict(img), axis = 1)
-        names = [class_names[i] for i in classes]
-        name = names[0]
-        # json_name = jsonify(name)
-        print(f"-------------> NAME {name}")
-    return render_template('index.html', message = jsonify(name))
+    
+    # if request.method == "POST":
+    # request.result(data) #MISSING THIS PART
+
+    # print(request.files("file"))
+    predictions = model.predict(x)  
+    print(f'PREDICTED:, {predictions}')
+    img = np.reshape(img,[1,32,32,3])
+    print(f'RESHAPED PREDICTED IMAGE: {img}')
+    classes = np.argmax(model.predict(img), axis = 1)
+    names = [class_names[i] for i in classes]
+    name = names[0]
+    # json_name = jsonify(name)
+    print(f"-------------> NAME {name}")
+    return render_template('index.html', message = name)
+
+# Added with Carlos and Caleb
+@app.route("/upload/<image>", methods=["POST"])
+def upload(image):
+    print(image)
+    return (f"<h1>{image}</h1>")
 
 if __name__ == "__main__":
     app.run(debug=True)

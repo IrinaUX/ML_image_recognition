@@ -29,7 +29,6 @@ function selectedFileHandler(e) {
   console.log(fileName);
   var FR = new FileReader();
   FR.readAsDataURL(file);
-
   FR.onloadend = () => {
     imagePreview.src = URL.createObjectURL(file);
     console.log(imagePreview.src);
@@ -44,7 +43,17 @@ function selectedFileHandler(e) {
     let display = document.getElementById("image-display");
     display.src = FR.result;
     show(display);
-    console.log(display.src);
+    // console.log(display.src);
+
+    // 
+    display_source = (display.src).split(",");
+    console.log(display_source);
+
+    // Added with Carlos and Caleb
+    let url = "/upload/" + display.src;
+    console.log(url);
+    //
+    fetch(url);
   };
 
   console.log(FR);
