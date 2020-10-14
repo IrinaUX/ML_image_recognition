@@ -12,8 +12,9 @@ from tensorflow.keras.applications.imagenet_utils import preprocess_input, decod
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
-from helperfunctions import b64_PIL, num_b64
-from flask_socketio import SocketIO, emit, join_room, leave_room
+import base64
+
+
 
 # Create an instance of Flask
 app = Flask(__name__)

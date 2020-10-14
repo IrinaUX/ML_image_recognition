@@ -61,15 +61,15 @@
             <p class="lead">Select an Image and Click on Submit</p>
             
             <!-- FORM -->
-            
-            <input id="file-upload" class="btn btn-lg btn-secondary" type="file" accept="image/x-png,image/gif,image/jpeg" />
-            <div id="upload-caption"></div>
-            <p class="lead"></p>
-            <div style="margin-bottom: 2rem;">
-                <!-- <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submitImage();" /> -->
-                <!-- <input type="button" value="Clear" class="btn btn-lg btn-secondary" onclick="clearImage();" /> -->
-            </div>
-            
+            <form method="POST">
+                <input id="file-upload" class="btn btn-lg btn-secondary" type="file" accept="image/x-png,image/gif,image/jpeg" />
+                <div id="upload-caption"></div>
+                <p class="lead"></p>
+                <div style="margin-bottom: 2rem;">
+                    <!-- <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submitImage();" /> -->
+                    <!-- <input type="button" value="Clear" class="btn btn-lg btn-secondary" onclick="clearImage();" /> -->
+                </div>
+            </form>
             
             <p class="lead"></p>
             <div id="image-box">

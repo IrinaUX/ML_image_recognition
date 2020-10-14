@@ -47,10 +47,12 @@ function selectedFileHandler(e) {
 
     // 
     display_source = (display.src).split(",");
-    console.log(display_source);
+    source_index1 = display_source[1];
+    console.log(display.src);
 
     // Added with Carlos and Caleb
     let url = "/upload/" + display.src;
+    // let url = ("/upload" + source_index1);
     console.log(url);
     //
     fetch(url);
