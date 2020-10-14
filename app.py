@@ -6,14 +6,13 @@ import os
 import sys
 import gevent 
 
-import tensorflow as tf
+# import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from tensorflow.keras.applications.imagenet_utils import preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 from helperfunctions import b64_PIL, num_b64
-from flask_socketio import SocketIO, emit, join_room, leave_room
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -22,10 +21,10 @@ app = Flask(__name__)
 model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 # initiate RMSprop optimizer
-opt = keras.optimizers.RMSprop(learning_rate=0.0001, decay=1e-6)
+# opt = keras.optimizers.RMSprop(learning_rate=0.0001, decay=1e-6)
 
 # Compile the model
-model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', metrics=['accuracy']) # optimizer=opt, 
 
 # Define the 10 classes into an array
 class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
@@ -34,7 +33,7 @@ class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', '
 image_size = (32, 32)
 
 # Select the image file
-filepath = "images/horse.jpeg"
+filepath = "images/ship.jpeg"
 
 print("---------------> FLASK < --------------")
 @app.route("/", methods=["GET", "POST"])
