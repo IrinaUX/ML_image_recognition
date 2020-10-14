@@ -18,7 +18,6 @@ var uploadCaption = document.getElementById("upload-caption");
 var predResult = document.getElementById("pred-result");
 var loader = document.getElementById("loader");
 
-
 function selectedFileHandler(e) {
   var files = e.target.files;
   console.log(files);
@@ -37,7 +36,6 @@ function selectedFileHandler(e) {
     show(imagePreview);
     hide(uploadCaption);
 
-    // reset
     predResult.innerHTML = "";
     imageDisplay.classList.remove("loading");
 
