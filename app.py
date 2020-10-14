@@ -6,15 +6,11 @@ import os
 import sys
 import gevent 
 
-import tensorflow as tf
+# import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from tensorflow.keras.applications.imagenet_utils import preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-
-import base64
-
-
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -23,10 +19,10 @@ app = Flask(__name__)
 model = load_model('saved_models/keras_cifar10_trained_model.h5')
 
 # initiate RMSprop optimizer
-opt = keras.optimizers.RMSprop(learning_rate=0.0001, decay=1e-6)
+# opt = keras.optimizers.RMSprop(learning_rate=0.0001, decay=1e-6)
 
 # Compile the model
-model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', metrics=['accuracy']) # optimizer=opt, 
 
 # Define the 10 classes into an array
 class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
@@ -35,26 +31,26 @@ class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', '
 image_size = (32, 32)
 
 # Select the image file
-filepath = "images/horse.jpeg"
+filepath = "images/ship.jpeg"
 
 print("---------------> FLASK < --------------")
 @app.route("/", methods=["GET", "POST"])
 def home():
-    print("IMAGE LOADED")
+    # print("IMAGE LOADED")
     img = image.load_img(filepath, target_size=image_size)
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
-    print("IMAGE PREPROCESSED")
+    # print("IMAGE PREPROCESSED")
     
     # if request.method == "POST":
     # request.result(data) #MISSING THIS PART
 
     # print(request.files("file"))
     predictions = model.predict(x)  
-    print(f'PREDICTED:, {predictions}')
+    # print(f'PREDICTED:, {predictions}')
     img = np.reshape(img,[1,32,32,3])
-    print(f'RESHAPED PREDICTED IMAGE: {img}')
+    # print(f'RESHAPED PREDICTED IMAGE: {img}')
     classes = np.argmax(model.predict(img), axis = 1)
     names = [class_names[i] for i in classes]
     name = names[0]
@@ -63,8 +59,9 @@ def home():
     return render_template('index.html', message = name)
 
 # Added with Carlos and Caleb
-@app.route("/upload/<image>", methods=["POST"])
+@app.route("/upload/<image>") # , methods=["GET"]
 def upload(image):
+    print(f"--*-*-*-*-*-*-*-*-*-*-*-> ROUTE ---- UPLOAD ")
     print(image)
     return (f"<h1>{image}</h1>")
 

@@ -18,7 +18,6 @@ var uploadCaption = document.getElementById("upload-caption");
 var predResult = document.getElementById("pred-result");
 var loader = document.getElementById("loader");
 
-
 function selectedFileHandler(e) {
   var files = e.target.files;
   console.log(files);
@@ -36,7 +35,6 @@ function selectedFileHandler(e) {
     show(imagePreview);
     hide(uploadCaption);
 
-    // reset
     predResult.innerHTML = "";
     imageDisplay.classList.remove("loading");
 
@@ -44,18 +42,27 @@ function selectedFileHandler(e) {
     display.src = FR.result;
     show(display);
     // console.log(display.src);
-
-    // 
     display_source = (display.src).split(",");
     source_index1 = display_source[1];
     console.log(display.src);
-
+    
     // Added with Carlos and Caleb
-    let url = "/upload/" + display.src;
+    // let url = "/upload/" + display.src;
     // let url = ("/upload" + source_index1);
-    console.log(url);
-    //
+    // let url = display.src;
+    // let url = "upload/" + display.src;
+    // console.log(display.src);
+    // fetch(url);
+    // console.log(url)
+
+    // let url = "upload/" + imagePreview.src;
+    url = imagePreview.src;
+    console.log(imagePreview.src);
     fetch(url);
+    console.log(url);
+
+    
+    console.log("--------------> FETCHED")
   };
 
   console.log(FR);
