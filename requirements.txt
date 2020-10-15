@@ -2,7 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
 # keras==2.4.3
-
+gevent==1.4.0
 flask==1.1.2
 psycopg2==2.8.4
 dnspython==1.16.0
