@@ -95,7 +95,23 @@ def predict():
 
     return None
 
-
+@app.route('/draw', methods=['GET', 'POST'])
+def draw():
+    if request.method == 'POST':
+        # Get the image from post request
+        img = base64_to_pil(request.json)
+        # Make prediction
+        preds = model_predict(img, model)
+        print(preds, "ATTENTION - CANVAS")
+        class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
+        # find the index of the class with maximum score
+        pred = np.argmax(preds, axis=-1)
+        result = class_names[pred[0]]
+        print(result, pred,'TOKEN' )
+        pred_proba = "{:.3f}".format(np.amax(preds))
+        # Serialize the result, you can add additional fields
+        return jsonify(result=result, probability=pred_proba)
+    return None
 if __name__ == '__main__':
     
 

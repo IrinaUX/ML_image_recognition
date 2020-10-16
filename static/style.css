@@ -23,6 +23,30 @@
   color: #666666;
 }
 
+#can{
+  background-color:white;
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 400px;
+  max-height: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  position: center;
+}
+
+.canvas2{
+  padding-top: 20px;
+  background-color:white;
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 400px;
+  max-height: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  position: center;
+}
 
 
 /* Links */
