@@ -1,4 +1,8 @@
 <html>
+<!-- CSS Stylesheets with Relative Paths -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -6,15 +10,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Image App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}" /> -->
   <link rel="stylesheet" type="text/css" href="../static/style.css" />
   <!-- <link rel="shortcut icon" type="image/png" href="../static/favicon.png"> -->
   <!-- Reset CSS -->
   <!-- <link rel="stylesheet" href="../static/css/reset.css"> -->
 
-    <!-- Bootstrap core CSS -->
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="cover.css" rel="stylesheet"> -->
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -42,6 +42,8 @@
 
         var x = "dark-gray",
             y = 2;
+
+        var imageDisplay = document.getElementById("image-display");
 
         console.log("Script");
 
@@ -81,7 +83,9 @@
             document.getElementById("img-capture").style.border = "2px solid";
             var dataURL = canvas.toDataURL();
             document.getElementById("img-capture").src = dataURL;
+            console.log(dataURL);
             document.getElementById("img-capture").style.display = "inline";
+            // predictImage(dataURL);
         }
 
         function findxy(res, e) {
@@ -116,12 +120,42 @@
         }
         
         function erase() {
-            var m = confirm("Want to clear");
-            if (m) {
-                ctx.clearRect(0, 0, w, h);
-                document.getElementById("canvasimg").style.display = "none";
-            }
+            ctx.clearRect(0, 0, w, h);
+            document.getElementById("img-capture").style.display = "none";
         }
+
+        function submit(image) {
+            console.log("submit");
+            canvas = document.getElementById('can');
+            console.log(canvas);
+            var dataURL = canvas.toDataURL();
+            image = document.getElementById("img-capture");
+            image.src = dataURL;
+            console.log(image.src);
+            console.log(dataURL);
+            predictImage(dataURL);
+            }
+        
+        function predictImage(image) {
+            fetch("/canvas", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(image)
+            })
+                .then(resp => {
+                if (resp.ok)
+                    resp.json().then(data => {
+                    displayResult(data);
+                    });
+                })
+                .catch(err => {
+                console.log("Error occured", err.message);
+                window.alert("Something went wrong.");
+                });
+            }
+
 
     </script>
 
@@ -156,22 +190,14 @@
         <br>
         <div style="margin-bottom: 2rem;">
             <input type="button" value="Capture" onclick="save()" class="btn btn-lg btn-secondary" onclick="captureImage();" />
-            <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submitImage();" />
+            <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submit();" />
             <input type="button" value="Clear" class="btn btn-lg btn-secondary" onclick="erase()">
         
         </div>
         <div class="canvas2">
+            <h1 id="pred-result" class="hidden"></h1>
             <img id="img-capture" width="400" height="400">
         </div>
-        
-        <p class="lead"></p>
-        <!-- <div id="image-box">
-            <img id="image-display" />
-            <h1 id="pred-result" class="hidden"></h1>
-            <svg id="loader" class="hidden" viewBox="0 0 32 32" width="32" height="32">
-            <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
-            </svg>
-        </div> -->
     </main>
 
 

@@ -52,6 +52,7 @@ print('Start serving')
 
 
 def model_predict(img, model):
+    print("------------- MODEL PREDICT ------------")
     img = img.resize((32, 32))
 
     # Preprocessing the image
@@ -73,7 +74,9 @@ def index():
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
+    print("------------- PREDICT ------------")
     if request.method == 'POST':
+        print("------------- PREDICT POST ------------")
         # Get the image from post request
         img = base64_to_pil(request.json)
 
@@ -95,23 +98,34 @@ def predict():
 
     return None
 
-@app.route('/draw', methods=['GET', 'POST'])
-def draw():
+
+@app.route('/canvas', methods=['GET', 'POST'])
+def canvas():
+    print("------------- PREDICT ------------")
     if request.method == 'POST':
+        print("------------- PREDICT POST ------------")
         # Get the image from post request
         img = base64_to_pil(request.json)
+
         # Make prediction
         preds = model_predict(img, model)
-        print(preds, "ATTENTION - CANVAS")
+        print(preds, "ATTENTION")
+
         class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
+
         # find the index of the class with maximum score
         pred = np.argmax(preds, axis=-1)
         result = class_names[pred[0]]
         print(result, pred,'TOKEN' )
+       
         pred_proba = "{:.3f}".format(np.amax(preds))
+        
         # Serialize the result, you can add additional fields
         return jsonify(result=result, probability=pred_proba)
+
     return None
+
+
 if __name__ == '__main__':
     
 
