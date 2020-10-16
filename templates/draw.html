@@ -32,8 +32,29 @@
 
 
     </style>
-    <script>
+    <script type="text/javascript">
+        var canvas, ctx, flag = false,
+            prevX = 0,
+            currX = 0,
+            prevY = 0,
+            currY = 0,
+            dot_flag = false;
+
+        var x = "dark-gray",
+            y = 2;
+
         console.log("Script");
+
+        function draw() {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.strokeStyle = x;
+            ctx.lineWidth = y;
+            ctx.stroke();
+            ctx.closePath();
+        }    
+
         function init() {
             console.log("Script initialized");
             canvas = document.getElementById('can');
@@ -54,6 +75,13 @@
             canvas.addEventListener("mouseout", function (e) {
                 findxy('out', e)
             }, false);
+        }
+
+        function save() {
+            document.getElementById("img-capture").style.border = "2px solid";
+            var dataURL = canvas.toDataURL();
+            document.getElementById("img-capture").src = dataURL;
+            document.getElementById("img-capture").style.display = "inline";
         }
 
         function findxy(res, e) {
@@ -84,6 +112,14 @@
                     currY = e.clientY - canvas.offsetTop;
                     draw();
                 }
+            }
+        }
+        
+        function erase() {
+            var m = confirm("Want to clear");
+            if (m) {
+                ctx.clearRect(0, 0, w, h);
+                document.getElementById("canvasimg").style.display = "none";
             }
         }
 
@@ -121,9 +157,11 @@
         <div style="margin-bottom: 2rem;">
             <input type="button" value="Capture" onclick="save()" class="btn btn-lg btn-secondary" onclick="captureImage();" />
             <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submitImage();" />
+            <input type="button" value="Clear" class="btn btn-lg btn-secondary" onclick="erase()">
+        
         </div>
         <div class="canvas2">
-            <canvas id="draw2" width="400" height="400"></canvas>
+            <img id="img-capture" width="400" height="400">
         </div>
         
         <p class="lead"></p>
