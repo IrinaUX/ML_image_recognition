@@ -4,6 +4,7 @@ import sys
 from flask import Flask, redirect, request, render_template,jsonify
 from process_predict import predict_new, base64_to_pil
 from gevent.pywsgi import WSGIServer
+from tensorflow.keras.preprocessing import image
 
 app = Flask(__name__)
 
@@ -17,12 +18,12 @@ def predict():
     if request.method == 'POST':
         # #Get the image from post request
         image_new = base64_to_pil(request.json)
-
+        # img = image.load_img(image_new)
+        print(image_new)
         # Make prediction and return result
         result = predict_new(image_new)
         return jsonify(result=result)
     return None
-
 
 @app.route('/draw.html', methods=['GET', 'POST'])
 def draw():

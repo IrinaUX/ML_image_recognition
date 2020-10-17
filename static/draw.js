@@ -13,10 +13,10 @@ var x = "dark-gray",
 var imageDisplay = document.getElementById("img-capture");
 var predResult = document.getElementById("pred-result");
 var canvas = document.getElementById("can");
-
 var loader = document.getElementById("loader");
 
-console.log(canvas);
+imageDisplay.addEventListener("change", fileSelectHandler, false);
+
 
 function draw() {
     ctx.beginPath();
@@ -53,13 +53,15 @@ function init() {
 
 function submit(image) {
     console.log("submit");
+    console.log(image);
+
     if (!imageDisplay.src || !imageDisplay.src.startsWith("data")) {
         window.alert("Please select an image before submit.");
         return;
     }
     canvas = document.getElementById('can');
     console.log(canvas);
-    var dataURL = canvas.toDataURL();
+    var dataURL = canvas.toDataURL('image/jpeg');
     image = document.getElementById("img-capture");
     image.src = dataURL;
     console.log(image.src);
@@ -68,7 +70,7 @@ function submit(image) {
 
 function save() {
     // document.getElementById("img-capture").style.border = "2px solid";
-    var dataURL = canvas.toDataURL();
+    var dataURL = canvas.toDataURL('image/jpeg');
     document.getElementById("img-capture").src = dataURL;
     console.log(dataURL);
     document.getElementById("img-capture").style.display = "inline";
@@ -137,6 +139,35 @@ fetch("/predict", {
     console.log("Error occured", err.message);
     window.alert("Something went wrong.");
     });
+}
+
+function fileSelectHandler(e) {
+  
+    var files = e.target.files || e.dataTransfer.files;
+    console.log("FILE SELECT")
+    for (var i = 0, f; (f = files[i]); i++) {
+      previewFile(f);
+    }
+  }
+
+function previewFile(file) {
+
+    console.log(file.name);
+    var fileName = encodeURI(file.name);
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+        imagePreview.src = URL.createObjectURL(file);
+
+        show(imagePreview);
+        hide(uploadCaption);
+
+        // reset
+        predResult.innerHTML = "";
+
+        displayImage(reader.result, "img-capture");
+    };
 }
 
 init();

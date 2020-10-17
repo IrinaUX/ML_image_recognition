@@ -39,11 +39,9 @@
         </p>
         <p class="lead">Try drawing cat, dog, plane, truck, frog, bird, ship, automobile, deer or horse</p>
         <div class="col-lg-offset-4" class="canvas">
-            <canvas id="can" width="400" height="400"></canvas>
+            <canvas id="can" width="250" height="250"></canvas>
         </div>
-        <br>
         <p class="lead"></p>
-        <br>
         <div style="margin-bottom: 2rem;">
             <input type="button" value="Capture" onclick="save()" class="btn btn-lg btn-secondary" onclick="captureImage();" />
             <input type="button" value="Submit" class="btn btn-lg btn-secondary" onclick="submit();" />
@@ -52,7 +50,8 @@
         </div>
         <h1 id="pred-result"> {{pred}} Classification result </h1>
         <div class="canvas2">
-            <img id="img-capture" width="400" height="400" />
+            <img id="img-capture" width="250" height="250" />
+
         <svg id="loader" class="hidden" viewBox="0 0 32 32" width="32" height="32">
             <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
         </svg>
