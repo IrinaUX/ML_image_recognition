@@ -108,6 +108,9 @@ if (res == 'move') {
 function erase() {
     ctx.clearRect(0, 0, w, h);
     document.getElementById("img-capture").style.display = "none";
+    ctx.fillStyle = "PALEGREEN";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 }
 
 function displayResult(data) {
