@@ -34,7 +34,7 @@ function init() {
     ctx = canvas.getContext("2d");
     w = canvas.width;
     h = canvas.height;
-    ctx.fillStyle = "yellow";
+    ctx.fillStyle = "PALEGREEN";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     canvas.addEventListener("mousemove", function (e) {
