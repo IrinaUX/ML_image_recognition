@@ -22,7 +22,6 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 
-
 def base64_to_pil(img_base64):
    
     image_data = re.sub('^data:image/.+;base64,', '', img_base64)
@@ -66,10 +65,15 @@ def model_predict(img, model):
     return preds
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def index():
     # Main page
     return render_template('index.html')
+
+# @app.route('/index.html', methods=['GET'])
+# def index():
+#     # Main page
+#     return render_template('index.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -99,36 +103,13 @@ def predict():
     return None
 
 
-@app.route('/canvas', methods=['GET', 'POST'])
-def canvas():
-    print("------------- PREDICT ------------")
-    if request.method == 'POST':
-        print("------------- PREDICT POST ------------")
-        # Get the image from post request
-        img = base64_to_pil(request.json)
+@app.route('/draw.html', methods=['GET', 'POST'])
+def draw():
+    return render_template('draw.html')
 
-        # Make prediction
-        preds = model_predict(img, model)
-        print(preds, "ATTENTION")
-
-        class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
-
-        # find the index of the class with maximum score
-        pred = np.argmax(preds, axis=-1)
-        result = class_names[pred[0]]
-        print(result, pred,'TOKEN' )
-       
-        pred_proba = "{:.3f}".format(np.amax(preds))
-        
-        # Serialize the result, you can add additional fields
-        return jsonify(result=result, probability=pred_proba)
-
-    return None
 
 
 if __name__ == '__main__':
-    
-
     # Serve the app with gevent
     http_server = WSGIServer(('0.0.0.0', 5000), app)
     http_server.serve_forever()
