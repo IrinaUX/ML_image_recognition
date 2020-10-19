@@ -112,7 +112,7 @@ function erase() {
     document.getElementById("img-capture").style.display = "none";
     ctx.fillStyle = "PALEGREEN";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+    predResult.innerHTML = "";
 }
 
 function displayResult(data) {
@@ -122,12 +122,12 @@ function displayResult(data) {
 
 function predictImage(image) {
     console.log("PREDICT JS");
-fetch("/predict", {
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json"
-    },
-    body: JSON.stringify(image)
+    fetch("/predict", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(image)
 })
     .then(resp => {
     if (resp.ok)
@@ -162,10 +162,6 @@ function previewFile(file) {
 
         show(imagePreview);
         hide(uploadCaption);
-
-        // reset
-        predResult.innerHTML = "";
-
         displayImage(reader.result, "img-capture");
     };
 }
