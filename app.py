@@ -68,7 +68,8 @@ def predict():
     return None
 
 # load model
-MODEL_PATH = 'saved_models/keras_cifar10_trained_model.h5'
+# MODEL_PATH = 'saved_models/keras_cifar10_trained_model.h5'
+MODEL_PATH = 'saved_models/Vgg13_model.h5'
 model = load_model(MODEL_PATH)
 print('local host started at port 5000')
 
