@@ -3,8 +3,8 @@ import os
 
 # Flask
 from flask import Flask, redirect, request, render_template, jsonify, redirect, Response, url_for
-# from werkzeug.utils import secure_filename
-# from gevent.pywsgi import WSGIServer
+from werkzeug.utils import secure_filename
+from gevent.pywsgi import WSGIServer
 
 # TensorFlow and tf.keras
 import tensorflow as tf
@@ -88,8 +88,8 @@ def model_predict(image_new):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
     # Serve the app with gevent
-    # http_server = WSGIServer(('0.0.0.0', 5000), app)
-    # http_server.serve_forever()
+    http_server = WSGIServer(('0.0.0.0', 5000), app)
+    http_server.serve_forever()
     
