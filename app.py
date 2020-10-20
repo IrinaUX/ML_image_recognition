@@ -89,7 +89,7 @@ def model_predict(image_new):
 
 
 if __name__ == '__main__':
-    app.run(threaded=True)
+    app.run(debug=True)
     # # Serve the app with gevent
     # http_server = WSGIServer(('0.0.0.0', 5000), app)
     # http_server.serve_forever()
