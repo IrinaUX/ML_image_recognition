@@ -2,7 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
 
-keras==2.4.3
+tensorflow.keras==2.4.0
 flask==1.1.2
 psycopg2==2.8.4
 dnspython==1.16.0
@@ -10,6 +10,7 @@ gunicorn==20.0.4
 keras-preprocessing==1.1.2
 tensorflow==2.3.1
 
+# keras==2.4.3
 # pandas==1.0.5
 # Pillow==6.1.0
 # gevent==1.4.0
