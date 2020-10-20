@@ -6,7 +6,7 @@ from flask import Flask, redirect, request, render_template, jsonify, redirect, 
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
-TensorFlow and tf.keras
+# TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
 
